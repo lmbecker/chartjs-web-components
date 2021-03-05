@@ -1,16 +1,13 @@
 import {Chart} from 'chart.js';
-import {html, LitElement, property, TemplateResult} from 'lit-element';
+import {html, LitElement, property, PropertyValues, TemplateResult} from 'lit-element';
 /**
  * Base Chart of chartjs-web-components
  */
 export default class BaseChart extends LitElement {
-    public chart: Chart.ChartConfiguration&Chart;
-    @property()
-    public type: Chart.ChartType; // tslint:disable-line:no-reserved-keywords
-    @property()
-    public data: Chart.ChartData;
-    @property()
-    public options: Chart.ChartOptions;
+    @property({attribute: false}) public chart: Chart.ChartConfiguration&Chart;
+    @property({type: String}) public type: Chart.ChartType; // tslint:disable-line:no-reserved-keywords
+    @property({type: Object}) public data: Chart.ChartData;
+    @property({type: Object}) public options: Chart.ChartOptions;
     /**
      * Called when the dom first time updated. init chart.js data, add observe, and add resize listener
      */
@@ -19,8 +16,8 @@ export default class BaseChart extends LitElement {
         const options: Chart.ChartOptions = this.options || {};
         if (!this.chart) {
             const ctx: CanvasRenderingContext2D = this.shadowRoot
-            .querySelector('canvas')
-            .getContext('2d');
+                .querySelector('canvas')
+                .getContext('2d');
             this.chart = new Chart(ctx, {
                 type: this.type,
                 data,
@@ -49,6 +46,7 @@ export default class BaseChart extends LitElement {
     }
     /**
      * Use Proxy to watch object props change
+     *
      * @params obj
      */
     public observe<T extends object>(obj: T): T {
@@ -58,7 +56,7 @@ export default class BaseChart extends LitElement {
             set: (target: T, prop: string, val: unknown): boolean => {
                 target[prop] = val;
                 Promise.resolve()
-                .then(updateChart);
+                    .then(updateChart);
 
                 return true;
             }
@@ -83,14 +81,15 @@ export default class BaseChart extends LitElement {
             </div>
         `;
     }
+
     /**
      * Get update state,when element update completed will return true
      */
-    get updateComplete(): Promise<unknown> {
+    /* get updateComplete(): Promise<unknown> {
         return (async (): Promise<unknown> => {
             return super.updateComplete;
         })();
-    }
+    } */
     /**
      * Manually update chart
      */
@@ -98,7 +97,7 @@ export default class BaseChart extends LitElement {
         if (this.chart) {
             this.chart.update();
         }
-    }
+    };
 }
 if (!customElements.get('base-chart')) {
     customElements.define('base-chart', BaseChart);
