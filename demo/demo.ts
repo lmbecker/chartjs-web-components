@@ -12,7 +12,7 @@ class MyDemo extends LitElement {
     }]
   };
   public options = {};
-  public type = 'line';
+  public type: Chart.ChartType = 'line';
   public render() {
     const {type, data, options} = this;
     return html`
