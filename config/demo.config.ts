@@ -10,6 +10,7 @@ const config: webpack.Configuration = {
         'base-demo': './demo/demo.ts',
         'react-demo': './demo/react-demo.tsx',
         'vue-demo': './demo/vue-demo.ts'
+        'base-demo': './demo/demo.ts'
     },
     output: {
         path: path.resolve(__dirname, '..', 'live-demo'),

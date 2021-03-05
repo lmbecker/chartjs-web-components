@@ -12,6 +12,7 @@ const config: Configuration = {
         web: './demo/demo.ts',
         react: './demo/react-demo.tsx',
         vue: './demo/vue-demo.ts'
+        web: './demo/demo.ts'
     },
     output: {
         path: path.resolve(__dirname, '..', 'dist'),

@@ -8,6 +8,7 @@ const banner=fs.readFileSync(path.resolve(__dirname, '..', 'LICENSE')).toString(
 const config: webpack.Configuration = {
     mode: 'production',
     entry: {base: './src/base.ts', react: './src/react.tsx', vue: './src/vue.ts'},
+    entry: {base: './src/base.ts'},
     output: {
         path: path.resolve(__dirname, '..', 'dist'),
         filename: `[name].js`
@@ -16,6 +17,7 @@ const config: webpack.Configuration = {
         extensions: ['.tsx', '.ts', '.js']
     },
     externals: ['chart.js','vue','react'],
+    externals: ['chart.js'],
     module: {
         rules: [
             {
