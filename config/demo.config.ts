@@ -1,20 +1,17 @@
-import CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as path from 'path';
+import * as fs from 'fs';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as webpack from 'webpack';
-import * as fs from 'fs'
 
-const banner=fs.readFileSync(path.resolve(__dirname, '..', 'LICENSE')).toString()
+const banner = fs.readFileSync(path.resolve(__dirname, '..', 'LICENSE')).toString();
 const config: webpack.Configuration = {
     mode: 'production',
     entry: {
-        'base-demo': './demo/demo.ts',
-        'react-demo': './demo/react-demo.tsx',
-        'vue-demo': './demo/vue-demo.ts'
         'base-demo': './demo/demo.ts'
     },
     output: {
         path: path.resolve(__dirname, '..', 'live-demo'),
-        filename: `[name].js`
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
@@ -37,7 +34,7 @@ const config: webpack.Configuration = {
     },
     plugins: [
         new webpack.BannerPlugin(banner),
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin()
     ]
 };
 module.exports = config;

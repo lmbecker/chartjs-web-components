@@ -1,17 +1,15 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as path from 'path';
+import * as fs from 'fs';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as webpack from 'webpack';
-import * as fs from 'fs'
-const banner=fs.readFileSync(path.resolve(__dirname, '..', 'LICENSE')).toString()
+const banner = fs.readFileSync(path.resolve(__dirname, '..', 'LICENSE')).toString();
 interface Configuration extends webpack.Configuration {
     devServer: any;
 }
 const config: Configuration = {
     mode: 'development',
+    devtool: 'inline-source-map',
     entry: {
-        web: './demo/demo.ts',
-        react: './demo/react-demo.tsx',
-        vue: './demo/vue-demo.ts'
         web: './demo/demo.ts'
     },
     output: {

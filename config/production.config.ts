@@ -1,22 +1,20 @@
-import CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as path from 'path';
+import * as fs from 'fs';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 //import CompressionPlugin from 'compression-webpack-plugin';
-import * as fs from 'fs'
-const banner=fs.readFileSync(path.resolve(__dirname, '..', 'LICENSE')).toString()
+const banner = fs.readFileSync(path.resolve(__dirname, '..', 'LICENSE')).toString();
 const config: webpack.Configuration = {
     mode: 'production',
-    entry: {base: './src/base.ts', react: './src/react.tsx', vue: './src/vue.ts'},
     entry: {base: './src/base.ts'},
     output: {
         path: path.resolve(__dirname, '..', 'dist'),
-        filename: `[name].js`
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
-    externals: ['chart.js','vue','react'],
     externals: ['chart.js'],
     module: {
         rules: [
@@ -37,7 +35,7 @@ const config: webpack.Configuration = {
     plugins: [
         new webpack.BannerPlugin(banner),
         new CleanWebpackPlugin(),
-        new BundleAnalyzerPlugin(),
+        new BundleAnalyzerPlugin()
         //new CompressionPlugin()
     ]
 };
